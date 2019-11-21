@@ -1,6 +1,15 @@
 version: 2.0
 jobs:
-
+helloci:
+    working_directory: ~/repo
+    docker:
+    - image: google/cloud-sdk:slim
+    steps:
+    - checkout
+    - run:
+        name: Say Hello
+        command: |
+          echo Hello Circle CI!
   unittests:
     working_directory: ~/repo
     docker:
@@ -67,6 +76,9 @@ jobs:
 
 workflows:
   version: 2
+  say-hello-to-ci:
+    jobs:
+    - helloci  
   test-build-deploy:
     jobs:
     - unittests:
